@@ -12,6 +12,7 @@
 		<android.version>2.2.1</android.version>
 		<util.database.rawsql.version>0.0.1</util.database.rawsql.version>
 		<util.log.api.version>0.0.4</util.log.api.version>
+		<util.log.log4j.version>0.0.4</util.log.log4j.version>
 	</properties>
 
 	<dependencies>
@@ -24,6 +25,11 @@
 			<groupId>${project.groupId}</groupId>
 			<artifactId>util.log.api</artifactId>
 			<version>${util.log.api.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>util.log.log4j</artifactId>
+			<version>${util.log.log4j.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.android</groupId>

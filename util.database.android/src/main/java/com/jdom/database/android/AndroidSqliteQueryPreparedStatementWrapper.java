@@ -52,8 +52,8 @@ public class AndroidSqliteQueryPreparedStatementWrapper implements
 	 * 
 	 * @see java.io.Closeable#close()
 	 */
+	@Override
 	public void close() throws IOException {
-		cursor.close();
 	}
 
 	/**
@@ -61,9 +61,14 @@ public class AndroidSqliteQueryPreparedStatementWrapper implements
 	 * 
 	 * @see com.jdom.database.api.PreparedStatementWrapper#execute()
 	 */
+	@Override
 	public boolean execute() throws SQLException {
-		this.cursor = db.rawQuery(sql, new String[0]);
-		return true;
+		try {
+			this.cursor = db.rawQuery(sql, new String[0]);
+			return true;
+		} catch (Exception e) {
+			throw new SQLException(e);
+		}
 	}
 
 	/**
@@ -71,6 +76,7 @@ public class AndroidSqliteQueryPreparedStatementWrapper implements
 	 * 
 	 * @see com.jdom.database.api.QueryPreparedStatementWrapper#getResultSet()
 	 */
+	@Override
 	public ResultSetWrapper getResultSet() throws SQLException {
 		return new AndroidCursorWrapper(cursor);
 	}

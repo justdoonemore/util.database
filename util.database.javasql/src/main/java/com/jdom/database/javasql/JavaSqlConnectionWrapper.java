@@ -19,7 +19,9 @@ package com.jdom.database.javasql;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 
+import com.jdom.database.api.DatabaseUtil;
 import com.jdom.database.rawsql.ConnectionWrapper;
 import com.jdom.database.rawsql.PreparedStatementWrapper;
 import com.jdom.database.rawsql.QueryPreparedStatementWrapper;
@@ -53,6 +55,7 @@ public class JavaSqlConnectionWrapper implements ConnectionWrapper {
 	 * 
 	 * @see java.io.Closeable#close()
 	 */
+	@Override
 	public void close() throws IOException {
 		try {
 			connection.close();
@@ -73,4 +76,19 @@ public class JavaSqlConnectionWrapper implements ConnectionWrapper {
 				connection.prepareStatement(sql));
 	}
 
+	@Override
+	public void executeSql(String sql) throws SQLException {
+		Statement statement = null;
+		try {
+			statement = connection.createStatement();
+			statement.executeUpdate(sql);
+		} finally {
+			DatabaseUtil.close(statement);
+		}
+	}
+
+	@Override
+	public boolean isClosed() throws SQLException {
+		return connection.isClosed();
+	}
 }

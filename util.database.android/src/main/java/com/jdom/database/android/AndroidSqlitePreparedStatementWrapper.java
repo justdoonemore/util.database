@@ -45,8 +45,11 @@ public class AndroidSqlitePreparedStatementWrapper implements
 	 * 
 	 * @see java.io.Closeable#close()
 	 */
+	@Override
 	public void close() throws IOException {
-		compileStatement.close();
+		if (this.compileStatement != null) {
+			compileStatement.close();
+		}
 	}
 
 	/**
@@ -55,6 +58,7 @@ public class AndroidSqlitePreparedStatementWrapper implements
 	 * @see com.jdom.database.api.PreparedStatementWrapper#setObject(int,
 	 *      java.lang.Object)
 	 */
+	@Override
 	public void setObject(int index, Object object) throws SQLException {
 		if (object instanceof String) {
 			compileStatement.bindString(index, (String) object);
@@ -74,6 +78,7 @@ public class AndroidSqlitePreparedStatementWrapper implements
 	 * 
 	 * @see com.jdom.database.api.PreparedStatementWrapper#execute()
 	 */
+	@Override
 	public boolean execute() throws SQLException {
 		compileStatement.execute();
 		return true;

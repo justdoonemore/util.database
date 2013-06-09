@@ -16,13 +16,14 @@
  */
 package com.jdom.database.rawsql;
 
+import java.io.Closeable;
 import java.sql.SQLException;
 
 /**
  * @author djohnson
  * 
  */
-public interface ConnectionWrapper {
+public interface ConnectionWrapper extends Closeable {
 
 	PreparedStatementWrapper prepareStatement(String sql) throws SQLException;
 
@@ -33,4 +34,8 @@ public interface ConnectionWrapper {
 	 */
 	QueryPreparedStatementWrapper prepareQueryStatement(String sql)
 			throws SQLException;
+
+	void executeSql(String sql) throws SQLException;
+
+	boolean isClosed() throws SQLException;
 }

@@ -43,8 +43,11 @@ public class AndroidCursorWrapper implements ResultSetWrapper {
 	 * 
 	 * @see java.io.Closeable#close()
 	 */
+	@Override
 	public void close() throws IOException {
-		cursor.close();
+		if (this.cursor != null) {
+			cursor.close();
+		}
 	}
 
 	/**
@@ -52,6 +55,7 @@ public class AndroidCursorWrapper implements ResultSetWrapper {
 	 * 
 	 * @see com.jdom.database.api.ResultSetWrapper#next()
 	 */
+	@Override
 	public boolean next() throws SQLException {
 		return cursor.moveToNext();
 	}
@@ -61,6 +65,7 @@ public class AndroidCursorWrapper implements ResultSetWrapper {
 	 * 
 	 * @see com.jdom.database.api.ResultSetWrapper#getLong(int)
 	 */
+	@Override
 	public long getLong(int i) throws SQLException {
 		return cursor.getLong(i - 1);
 	}
@@ -70,6 +75,7 @@ public class AndroidCursorWrapper implements ResultSetWrapper {
 	 * 
 	 * @see com.jdom.database.api.ResultSetWrapper#getString(int)
 	 */
+	@Override
 	public String getString(int i) throws SQLException {
 		return cursor.getString(i - 1);
 	}
@@ -79,6 +85,7 @@ public class AndroidCursorWrapper implements ResultSetWrapper {
 	 * 
 	 * @see com.jdom.database.api.ResultSetWrapper#getInt(int)
 	 */
+	@Override
 	public int getInt(int i) throws SQLException {
 		return cursor.getInt(i - 1);
 	}

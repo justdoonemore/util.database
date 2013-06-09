@@ -16,6 +16,7 @@
  */
 package com.jdom.database.android;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 import android.database.sqlite.SQLiteDatabase;
@@ -65,5 +66,21 @@ public class AndroidConnectionWrapper implements ConnectionWrapper {
 			throws SQLException {
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		return new AndroidSqliteQueryPreparedStatementWrapper(db, sql);
+	}
+
+	@Override
+	public void close() throws IOException {
+		// TODO: Is there anything to close?
+		// dbHelper.close();
+	}
+
+	@Override
+	public void executeSql(String sql) throws SQLException {
+		dbHelper.getWritableDatabase().execSQL(sql);
+	}
+
+	@Override
+	public boolean isClosed() throws SQLException {
+		return false;
 	}
 }

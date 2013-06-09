@@ -47,6 +47,7 @@ public class JavaSqlPreparedStatementWrapper implements
 	 * @see com.jdom.database.api.PreparedStatementWrapper#setObject(int,
 	 *      java.lang.Object)
 	 */
+	@Override
 	public void setObject(int index, Object object) throws SQLException {
 		this.stmt.setObject(index, object);
 
@@ -59,6 +60,7 @@ public class JavaSqlPreparedStatementWrapper implements
 	 * 
 	 * @see com.jdom.database.api.PreparedStatementWrapper#execute()
 	 */
+	@Override
 	public boolean execute() throws SQLException {
 		return this.stmt.execute();
 	}
@@ -68,6 +70,7 @@ public class JavaSqlPreparedStatementWrapper implements
 	 * 
 	 * @see com.jdom.database.api.PreparedStatementWrapper#getResultSet()
 	 */
+	@Override
 	public ResultSetWrapper getResultSet() throws SQLException {
 		return new JavaSqlResultSetWrapper(stmt.getResultSet());
 	}
@@ -77,6 +80,7 @@ public class JavaSqlPreparedStatementWrapper implements
 	 * 
 	 * @see java.io.Closeable#close()
 	 */
+	@Override
 	public void close() throws IOException {
 		try {
 			stmt.close();
