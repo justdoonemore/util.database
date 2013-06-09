@@ -1,0 +1,35 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.jdom</groupId>
+		<artifactId>util.database</artifactId>
+		<version>0.0.1</version>
+	</parent>
+	<artifactId>util.database.android</artifactId>
+
+	<properties>
+		<android.version>2.2.1</android.version>
+		<util.database.rawsql.version>0.0.1</util.database.rawsql.version>
+		<util.log.api.version>0.0.4</util.log.api.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>util.database.rawsql</artifactId>
+			<version>${util.database.rawsql.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>util.log.api</artifactId>
+			<version>${util.log.api.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.android</groupId>
+			<artifactId>android</artifactId>
+			<version>${android.version}</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+</project>
