@@ -1,0 +1,84 @@
+subprojects {
+
+   configurations() {
+      shared
+      sharedTest
+
+      compile {
+         extendsFrom shared
+      }
+
+      testCompile {
+         extendsFrom sharedTest
+      }
+   }
+	
+   apply plugin: 'java'
+   apply plugin: 'maven'
+   apply plugin: 'eclipse'
+
+   version "0.0.1"
+   group="com.jdom"
+
+   repositories {
+       maven {
+           credentials {
+              username nexusUsername
+              password nexusPassword
+           }
+           url nexusUrl
+       }
+   }
+   
+   uploadArchives {
+       repositories {
+           mavenDeployer {
+	           repository(url: releasesUrl) {
+	                authentication(userName: nexusUsername, password: nexusPassword)
+	           }
+           }
+       }
+   }
+
+   dependencies {
+      shared "com.jdom:util.log.api:0.0.4"
+      sharedTest "junit:junit:4.11"
+   }
+}
+
+project(':util.database.rawsql') {
+    dependencies {
+        compile project(':util.database.api')
+    }
+}
+
+project(':util.database.javasql') {
+    dependencies {
+        compile project(':util.database.api'), project(':util.database.rawsql')
+        compile "com.jdom:util.database.rawsql:0.0.1"
+        
+        testCompile "org.xerial:sqlite-jdbc:3.7.2"
+        testCompile "com.jdom:util.log.log4j:0.0.4"
+    }
+}
+
+project(':util.database.android') {
+    configurations {
+       provided
+    }
+    
+    sourceSets {
+       main.compileClasspath += configurations.provided
+       test.compileClasspath += configurations.provided
+       test.runtimeClasspath += configurations.provided
+    }
+    
+
+    dependencies {
+        provided "com.google.android:android:2.2.1"
+        
+        compile project(':util.database.api'), project(':util.database.rawsql')
+    }
+    
+    eclipse.classpath.plusConfigurations += configurations.provided
+}
