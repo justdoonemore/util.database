@@ -46,7 +46,11 @@ public class AndroidCursorWrapper implements ResultSetWrapper {
 	@Override
 	public void close() throws IOException {
 		if (this.cursor != null) {
-			cursor.close();
+			try {
+				cursor.close();
+			} catch (Exception e) {
+				throw new IOException(e);
+			}
 		}
 	}
 
@@ -57,7 +61,11 @@ public class AndroidCursorWrapper implements ResultSetWrapper {
 	 */
 	@Override
 	public boolean next() throws SQLException {
-		return cursor.moveToNext();
+		try {
+			return cursor.moveToNext();
+		} catch (Exception e) {
+			throw new SQLException(e);
+		}
 	}
 
 	/**
@@ -67,7 +75,11 @@ public class AndroidCursorWrapper implements ResultSetWrapper {
 	 */
 	@Override
 	public long getLong(int i) throws SQLException {
-		return cursor.getLong(i - 1);
+		try {
+			return cursor.getLong(i - 1);
+		} catch (Exception e) {
+			throw new SQLException(e);
+		}
 	}
 
 	/**
@@ -77,7 +89,11 @@ public class AndroidCursorWrapper implements ResultSetWrapper {
 	 */
 	@Override
 	public String getString(int i) throws SQLException {
-		return cursor.getString(i - 1);
+		try {
+			return cursor.getString(i - 1);
+		} catch (Exception e) {
+			throw new SQLException(e);
+		}
 	}
 
 	/**
@@ -87,7 +103,11 @@ public class AndroidCursorWrapper implements ResultSetWrapper {
 	 */
 	@Override
 	public int getInt(int i) throws SQLException {
-		return cursor.getInt(i - 1);
+		try {
+			return cursor.getInt(i - 1);
+		} catch (Exception e) {
+			throw new SQLException(e);
+		}
 	}
 
 }

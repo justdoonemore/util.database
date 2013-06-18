@@ -17,7 +17,7 @@ subprojects {
    apply plugin: 'maven'
    apply plugin: 'eclipse'
 
-   version "0.0.1"
+   version "0.0.2"
    group="com.jdom"
 
    repositories {
