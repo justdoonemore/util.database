@@ -90,7 +90,10 @@ public abstract class BaseRawDatabase implements RawDatabase {
 			stmt.execute();
 
 			resultSet = stmt.getResultSet();
-			long currentDbVersion = resultSet.getLong(1);
+			long currentDbVersion = DatabaseUtil.UNSET;
+			if (resultSet.next()) {
+				currentDbVersion = resultSet.getLong(1);
+			}
 			return currentDbVersion;
 		} catch (SQLException e) {
 			// Means the schema needs to be created

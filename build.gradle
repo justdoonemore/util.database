@@ -55,7 +55,6 @@ project(':util.database.rawsql') {
 project(':util.database.javasql') {
     dependencies {
         compile project(':util.database.api'), project(':util.database.rawsql')
-        compile "com.jdom:util.database.rawsql:0.0.1"
         
         testCompile "org.xerial:sqlite-jdbc:3.7.2"
         testCompile "com.jdom:util.log.log4j:0.0.4"
